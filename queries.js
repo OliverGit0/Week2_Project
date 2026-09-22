@@ -7,7 +7,6 @@ import dotenv from "dotenv";
 async function query1() {
   //Create a user with name Robin, email robin@example.com, password hashed_password_7, 
   // andcreatedAt set to 2025-06-25T101500Z
-  // Write code for Query 1 here
   await User.create({
     name: "Robin",
     email: "robin@example.com",
@@ -18,42 +17,36 @@ async function query1() {
 
 async function query2() {
   //Fetch the user with email alice@example.com.
-  // Write code for Query 2 here
   const user = await User.findOne({ email: "alice@example.com" });
   console.log(user);
 }
 
   async function query3() {
     //Fetch question with the title 'How can I improve the performance of a react app?'
-    // Write code for Query 3 here
     const question = await Question.findOne({ title: "How can I improve the performance of a react app?" });
     console.log(question);
   }
 
 async function query4() {
   //Find all questions tagged with 'javascript'.
-  // Write code for Query 4 here
   const questions = await Question.find({ tags: "javascript" });
   console.log(questions);
 }
 
 async function query5() {
   //Retrieve all questions posted after April 1, 2023.
-  // Write code for Query 5 here
   const questions = await Question.find({ createdAt: { $gt: new Date("2023-04-01") } });
   console.log(questions);
 }
 
 async function query6() {
   //Find all questions tagged with javascript or react.
-  // Write code for Query 6 here
   const questions = await Question.find({ tags: { $in: ["javascript", "react"] } });
   console.log(questions);
 }
 
 async function query7() {
   //Find all the distinct tags used in questions.
-  // Write code for Query 7 here
   const tags = await Question.distinct("tags");
   console.log(tags);
 }
@@ -62,21 +55,18 @@ async function query8() {
   //Retrieve all questions with at least 50 views
   const questions = await Question.find({ views: { $gte: 50 } });
   console.log(questions);
-  // Write code for Query 8 here
 }
 
 async function query9() {
   //List all answers with a vote count of 0
   const answers = await Answer.find({ voteCount: 0 });
   console.log(answers);
-  // Write code for Query 9 here
 }
 
 async function query10() {
   //Retrieve all answers with a voteCount greater than 0
   const answers = await Answer.find({ voteCount: { $gt: 0 } });
   console.log(answers);
-  // Write code for Query 10 here
 }
 
 async function query11() {
@@ -88,7 +78,6 @@ async function query11() {
     }
   });
   console.log(users);
-  // Write code for Query 11 here
 }
 
 async function query12() {
@@ -96,12 +85,10 @@ async function query12() {
   const question = await Question.findOne({ title: "How do I set up routing with react router v6?" });
   const answers = await Answer.find({ questionId: question._id }, { answerText: 1, author: 1 });
   console.log(answers);
-  // Write code for Query 12 here
 }
 
 async function query13() {
   //Find all users who have not posted any answers
-  // Write code for Query 13 here
   const users = await User.find({ _id: { $nin: await Answer.distinct("author") } });
   console.log(users);
 }
@@ -110,7 +97,6 @@ async function query14() {
   //Find the top two most upvoted questions
   const questions = await Question.find().sort({ voteCount: -1 }).limit(2);
   console.log(questions);
-  // Write code for Query 14 here
 }
 
 async function query15() {
@@ -119,7 +105,6 @@ async function query15() {
     { $group: { _id: "$author", answerCount: { $sum: 1 } } }
   ]);
   console.log(users);
-  // Write code for Query 15 here
 }
 
 async function query16() {
@@ -130,12 +115,10 @@ async function query16() {
     { $limit: 2 }
   ]);
   console.log(topUsers);
-  // Write code for Query 16 here
 }
 
 async function query17() {
   //Update the tags of the question 'Why is my async function returning a promise instead of the actual value?' to ['javascript', 'async']
-  // Write code for Query 17 here
   await Question.updateOne(
     { title: "Why is my async function returning a promise instead of the actual value?" },
     { $set: { tags: ["javascript", "async"] } }
@@ -144,7 +127,6 @@ async function query17() {
 
 async function query18() {
   // Update the name of the user with email 'alice@example.com' to 'Alice Smith'
-  // Write code for Query 18 here
   await User.updateOne(
     { email: "alice@example.com" },
     { $set: { name: "Alice Smith" } }
@@ -153,13 +135,11 @@ async function query18() {
 
 async function query19() {
   //Delete the user with email 'jhonny@example.com'.
-  // Write code for Query 19 here
   await User.deleteOne({ email: "jhonny@example.com" });
 }
 
 async function query20() {
   //Delete all answers of the user with email 'alice@example.com'
-  // Write code for Query 20 here
   const user = await User.findOne({ email: "alice@example.com" });
   if (user) {
     await Answer.deleteMany({ author: user._id });
